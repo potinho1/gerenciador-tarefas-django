@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Tarefas pendentes{% endblock %}
+
+{% block content %}
+<h1>Tarefas pendentes:</h1>
+<div class="list-group">
+    {% for tarefa in tarefas_pendentes %}
+    <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+        data-bs-target="#modal{{ tarefa.id }}">
+        <h5> {{ tarefa.descricao }} </h5>
+        <small>Criado em: {{ tarefa.criacao.day }}/{{ tarefa.criacao.month }}/{{ tarefa.criacao.year }} </small>
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="modal{{ tarefa.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ tarefa.descricao }} |
+                        {{tarefa.categoria|capfirst}} </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Modal Body
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+{% endblock %}
